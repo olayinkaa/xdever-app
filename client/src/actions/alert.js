@@ -4,6 +4,7 @@ import uuid from 'uuid'
 export const setAlert = (msg,alertType,timeout=6000) => async dispatch => {
     
     const id = uuid.v4()
+    
     dispatch({
       type: SET_ALERT,
       payload: {
@@ -17,5 +18,8 @@ export const setAlert = (msg,alertType,timeout=6000) => async dispatch => {
     type: REMOVE_ALERT,
     payload: id
   }),timeout)
+
+
+
   };
   

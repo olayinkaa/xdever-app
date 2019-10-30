@@ -11,6 +11,7 @@ import {
   GET_REPOS
 } from './types';
 
+
 // Get current users profile
 export const getCurrentProfile = () => async dispatch => {
   try {
@@ -20,6 +21,7 @@ export const getCurrentProfile = () => async dispatch => {
       type: GET_PROFILE,
       payload: res.data
     });
+
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -139,6 +141,7 @@ export const addExperience = (formData, history) => async dispatch => {
     dispatch(setAlert('Experience Added', 'success'));
 
     history.push('/dashboard');
+    
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -172,6 +175,7 @@ export const addEducation = (formData, history) => async dispatch => {
     dispatch(setAlert('Education Added', 'success'));
 
     history.push('/dashboard');
+    
   } catch (err) {
     const errors = err.response.data.errors;
 

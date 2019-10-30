@@ -7,8 +7,8 @@ const { check, validationResult } = require('express-validator');
 
 
 const Profile = require('../../models/Profile');
-// const User = require('../../models/User');
-// const Post = require('../../models/Post');
+const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 
 // @route    GET api/profile/me
@@ -22,7 +22,7 @@ router.get('/me', auth, async (req, res) => {
       );
   
       if (!profile) {
-        return res.status(400).json({ message: 'There is no profile for this user' });
+        return res.status(400).json({ msg: 'There is no profile for this user' });
       }
   
       res.json(profile);
@@ -138,7 +138,7 @@ router.get('/user/:user_id', async (req, res) => {
     } catch (err) {
       console.error(err.message);
       if (err.kind == 'ObjectId') {
-        return res.status(400).json({ msg: 'Profile not found' });
+        return res.status(400).json({ message: 'Profile not found' });
       }
       res.status(500).send('Server Error');
     }
@@ -151,13 +151,13 @@ router.get('/user/:user_id', async (req, res) => {
 router.delete('/', auth, async (req, res) => {
     try {
       // Remove user posts
-    //   await Post.deleteMany({ user: req.user.id });
+      await Post.deleteMany({ user: req.user.id });
 
       // Remove profile
       await Profile.findOneAndRemove({ user: req.user.id });
 
       // Remove user
-    //   await User.findOneAndRemove({ _id: req.user.id });
+      await User.findOneAndRemove({ _id: req.user.id });
   
       res.json({ msg: 'User deleted' });
     } catch (err) {
@@ -219,12 +219,13 @@ router.put(
         profile.experience.unshift(newExp);
   
         await profile.save();
-  
-        res.json({
-            status:200,
-            message:"Experience successfully added",
-            profile
-        });
+
+        res.json(profile)
+        // res.json({
+        //     status:200,
+        //     message:"Experience successfully added",
+        //     profile
+        // });
       } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -251,6 +252,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
     await profile.save();
 
     res.json(profile);
+    
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -421,7 +423,7 @@ router.get('/github/:username', (req, res) => {
         if (error) console.error(error);
   
         if (response.statusCode !== 200) {
-          return res.status(404).json({ msg: 'No Github profile found' });
+          return res.status(404).json({ message: 'No Github profile found' });
         }
   
         res.json(JSON.parse(body));

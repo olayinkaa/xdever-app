@@ -110,9 +110,7 @@ router.post('/',[
     catch(err)
     {
         console.log(err.message)
-        res.status(500).json({
-            
-        })
+        res.status(500).send("server error")
     }
     
     // get users avatar
