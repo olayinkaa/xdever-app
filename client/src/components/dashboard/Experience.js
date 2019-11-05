@@ -5,9 +5,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { deleteExperience } from '../../actions/profile';
 
-
 const Experience = ({ experience, deleteExperience }) => {
-  
   const experiences = experience.map(exp => (
     <tr key={exp._id}>
       <td>{exp.company}</td>

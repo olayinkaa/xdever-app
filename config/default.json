@@ -1,4 +1,4 @@
 {
-    "mongoURI" : "mongodb://localhost:27017/smartJames_DB",
-    "jwtSecret":"ayomide_ibrahim"
+  "mongoURI" : "mongodb://localhost:27017/smartJames_DB",
+  "jwtSecret":"ayomide_ibrahim"
 }
